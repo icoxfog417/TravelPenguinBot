@@ -12,7 +12,7 @@ class Environment():
     PROXY = "FIXIE_URL"  # for heroku
 
     def __init__(self, key_file=""):
-        self.key_file = os.path.join(os.path.dirname(__file__), "../" + key_file if key_file else "keys.json")
+        self.key_file = os.path.join(os.path.dirname(__file__), "../" + (key_file if key_file else "keys.json"))
         self.keys = {}
         if os.path.isfile(self.key_file):
             with open(self.key_file, "r", encoding="utf-8") as f:
