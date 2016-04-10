@@ -10,10 +10,18 @@ class Line():
     def __init__(self,
                  channel_id,
                  channel_secret,
-                 mid):
+                 mid,
+                 proxy=""):
         self.channel_id = channel_id
         self.channel_secret = channel_secret
         self.mid = mid
+        self.proxies = {}
+        if proxy:
+            self.proxies = {
+                "http": proxy,
+                "https": proxy
+            }
+
 
     @classmethod
     def receive(cls, body) -> [LineRequest]:
@@ -34,7 +42,7 @@ class Line():
 
         r_dict = message.to_dict()
 
-        resp = requests.post(url, data=r_dict, headers=headers)
+        resp = requests.post(url, data=r_dict, headers=headers, proxies=self.proxies)
         if not resp.ok:
             resp.raise_for_status()
 

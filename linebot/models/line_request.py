@@ -18,7 +18,7 @@ class LineRequest():
         self.to_channel = to_channel  # this id means bot api server
         self.event_type = event_type
         self.event_id = event_id
-        self.content = None
+        self.content = content
 
     @classmethod
     def parse(cls, body):

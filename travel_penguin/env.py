@@ -9,6 +9,7 @@ class Environment():
     LINE_CHANNEL_ID = "LINE_CHANNEL_ID"
     LINE_CHANNEL_SECRET = "LINE_CHANNEL_SECRET"
     LINE_MID = "LINE_MID"
+    PROXY = "FIXIE_URL"  # for heroku
 
     def __init__(self, key_file=""):
         self.key_file = os.path.join(os.path.dirname(__file__), "../" + key_file if key_file else "key.json")
@@ -34,6 +35,9 @@ class Environment():
                 self.get(self.LINE_CHANNEL_SECRET),
                 self.get(self.LINE_MID))
         return keys
+
+    def get_proxy(self):
+        return self.get(self.PROXY)
 
     def get_google_api_key(self):
         return self.get(self.GOOGLE_API_KEY)
