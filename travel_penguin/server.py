@@ -14,7 +14,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", IndexHandler),
-            (r"/bot", BotHandler)
+            (r"/callback", BotHandler)
         ]
 
         env = Environment()

@@ -10,7 +10,7 @@ class TestServer(AsyncHTTPTestCase):
 
     def test_bot(self):
         j = get_test_json()
-        response = self.fetch("/bot?debug=True", method="POST", body=j)
+        response = self.fetch("/callback?debug=True", method="POST", body=j)
         self.assertEqual(response.code, 200)
         rb = json.loads(response.body.decode("utf-8"))
         self.assertEqual(rb["status"], True)
