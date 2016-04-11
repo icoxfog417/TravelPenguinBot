@@ -36,7 +36,8 @@ class Line():
         headers = {
             "X-Line-ChannelID": self.channel_id,
             "X-Line-ChannelSecret": self.channel_secret,
-            "X-Line-Trusted-User-With-ACL": self.mid
+            "X-Line-Trusted-User-With-ACL": self.mid,
+            "Content-Type": "application/json; charset=UTF-8"
         }
 
         r_dict = message.to_dict()
