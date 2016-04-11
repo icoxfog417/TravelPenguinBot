@@ -34,7 +34,7 @@ class Line():
     def post(self, message: LineResponse):
         url = self.__make_url("/v1/events")
         headers = {
-            "X-Line-ChannelID": int(self.channel_id),
+            "X-Line-ChannelID": self.channel_id,
             "X-Line-ChannelSecret": self.channel_secret,
             "X-Line-Trusted-User-With-ACL": self.mid,
             "Content-Type": "application/json; charset=UTF-8"
@@ -44,8 +44,8 @@ class Line():
 
         resp = requests.post(url, data=json.dumps(r_dict), headers=headers, proxies=self.proxies)
         if not resp.ok:
-            raise Exception("Status({0} {1}): header={2}, proxy={3}, body={4}".format(
-                resp.status_code, resp.reason, headers, self.proxies, r_dict
+            raise Exception("Url({0}), Status({1} {2}): header={3}, proxy={4}, body={5}".format(
+                url, resp.status_code, resp.reason, headers, self.proxies, r_dict
             ))
 
     def __make_url(self, path):
