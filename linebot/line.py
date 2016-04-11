@@ -34,7 +34,7 @@ class Line():
     def post(self, message: LineResponse):
         url = self.__make_url("/v1/events")
         headers = {
-            "X-Line-ChannelID": self.channel_id,
+            "X-Line-ChannelID": int(self.channel_id),
             "X-Line-ChannelSecret": self.channel_secret,
             "X-Line-Trusted-User-With-ACL": self.mid,
             "Content-Type": "application/json; charset=UTF-8"
