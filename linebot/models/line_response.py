@@ -4,7 +4,7 @@ from linebot.models.line_types import ContentType
 class LineResponse():
 
     def __init__(self, to_mids, content=None):
-        self.to_mids = to_mids
+        self.to_mids = to_mids if isinstance(to_mids, (list, tuple)) else [to_mids]
         self.to_channel = 1383378250  # Fixed value
         self.event_type = "138311608800106203"  # Fixed value
         self.content = {} if content is None else content

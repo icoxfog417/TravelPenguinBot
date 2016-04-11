@@ -44,8 +44,8 @@ class Line():
 
         resp = requests.post(url, data=json.dumps(r_dict), headers=headers, proxies=self.proxies)
         if not resp.ok:
-            raise Exception("Status({0}): header={1}, proxy={2}, body={3}".format(
-                resp.status_code, headers, self.proxies, r_dict
+            raise Exception("Status({0} {1}): header={2}, proxy={3}, body={4}".format(
+                resp.status_code, resp.reason, headers, self.proxies, r_dict
             ))
 
     def __make_url(self, path):
