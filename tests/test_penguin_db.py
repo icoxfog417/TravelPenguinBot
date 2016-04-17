@@ -20,11 +20,15 @@ class TestPenguinDb(unittest.TestCase):
 
     def test_visit(self):
         place = self.get_place()
-        obj_id = self.DB.visit(place)
-        self.assertTrue(obj_id)
+        time = self.DB.visit(place)
+        self.assertTrue(time)
+
+        place = self.get_place()
+        place.name = "latest"
+        time = self.DB.visit(place)
 
         restored, time = self.DB.current()
-        self.assertEqual(place.place_id, restored.place_id)
+        self.assertEqual(place.name, restored.name)
 
 
     def get_place(self):

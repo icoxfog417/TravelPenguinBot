@@ -27,8 +27,9 @@ class PenguinDb():
     def current(self):
         collections = self.db[self.PLACES]
         current = collections.find().sort(self.TIMESTAMP_FIELD, -1).limit(1)
-        if current.count() == 1:
-            c = list(current)[0]
+        latest = list(current)
+        if len(latest) == 1:
+            c = latest[0]
             p = Place.deserialize(c)
             return p, c[self.TIMESTAMP_FIELD]
         else:
