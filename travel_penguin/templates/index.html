@@ -7,20 +7,28 @@
     width: 600px;
 }
 </style>
+<!--
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqtwC0qwVZ8WcB9NdXsSpVyQreSIMgMto&callback=initMap">
 </script>
-<!--
+-->
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?callback=initMap">
 </script>
--->
 <script type="text/javascript">
     var MAP = null;
+    function createInfoWindow(marker){
+        var content = "<span>" + marker.title + "</span>";
+        var info = new google.maps.InfoWindow({
+            content: content
+        });
+        return info;
+    }
+
     function initMap() {
         MAP = new google.maps.Map(document.getElementById("map"), {
             center: {lat: 35.712195, lng: 139.775220},
-            zoom: 9
+            zoom: 10
         });
 
         $.post("/", function(data){
@@ -34,7 +42,10 @@
                     position: location,
                     title: h.name
                 });
+
                 marker.setMap(MAP);
+                var info = createInfoWindow(marker);
+                info.open(MAP, marker);
                 path.push(location);
             }
 
