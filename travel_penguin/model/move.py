@@ -13,6 +13,6 @@ class Direction(Enum):
 
 
 class Distance(Enum):
-    Long = 20000
-    Middle = 10000
-    Short = 5000
+    Long = 10000
+    Middle = 5000
+    Short = 1000
