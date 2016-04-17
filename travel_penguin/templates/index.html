@@ -34,7 +34,7 @@
         $.post("/", function(data){
             var path = [];
             var markers = [];
-            var history = data.history;
+            var history = data.history.reverse();
             for(var i = 0; i < history.length; i++){
                 var h = history[i];
                 var location = new google.maps.LatLng(h.lat, h.lng);
