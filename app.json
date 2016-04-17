@@ -4,7 +4,8 @@
     "repository": "https://github.com/icoxfog417/TravelPenguinBot",
     "keywords": ["Python", "tornado", "LINE"],
     "addons": [
-        "fixie:tricycle"
+        "fixie:tricycle",
+        "mongolab:sandbox"
     ],
     "env": {
         "SECRET_TOKEN": {

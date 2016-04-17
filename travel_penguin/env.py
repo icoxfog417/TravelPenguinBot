@@ -9,6 +9,7 @@ class Environment():
     LINE_CHANNEL_ID = "LINE_CHANNEL_ID"
     LINE_CHANNEL_SECRET = "LINE_CHANNEL_SECRET"
     LINE_MID = "LINE_MID"
+    DATABASE_URL = "MONGODB_URI" # for heroku
     PROXY = "FIXIE_URL"  # for heroku
 
     def __init__(self, key_file=""):
@@ -41,3 +42,6 @@ class Environment():
 
     def get_google_api_key(self):
         return self.get(self.GOOGLE_API_KEY)
+
+    def get_database_url(self):
+        return self.get(self.DATABASE_URL)
