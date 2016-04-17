@@ -22,26 +22,32 @@ class PenguinNLU():
 
     def understand_move(self, text):
         generator = Tokenizer()
-        directions = []
-        distance = Distance.Middle
+        tokens = []
 
         for t in generator.tokenize(text):
+            tokens.append(t)
+
+        direction = self._understand_direction(tokens)
+        distance = self._understand_distance(tokens)
+
+        return direction, distance
+
+    def _understand_direction(self, tokens):
+        direction = None
+        directions = []
+
+        # gather direction descriptions
+        for t in tokens:
             pos = t.part_of_speech.split(",")
             if pos[0] == "名詞":
                 d = self.__detect_direction(t)
                 if d is not None:
                     directions.append(d)
 
-        direction = self.__decide_direction(directions)
-        return direction, distance
-
-    def __decide_direction(self, directions):
+        # decide direction
         if len(directions) == 0:
             return None
-        elif len([d for d in directions if d]) == 0:
-            return None
 
-        direction = None
         counts = Counter(directions)
         max_count = -1
         commons = []
@@ -88,3 +94,33 @@ class PenguinNLU():
             direction = Direction.NorthWest
 
         return direction
+
+    def _understand_distance(self, tokens):
+        Shorts = ["チョット", "イッシュン", "ワズカニ"]
+        Longs = ["スゴク", "デカク", "ハルカニ", "タクサン"]
+        distances = []
+        distance = Distance.Middle
+
+        for t in tokens:
+            pos = t.part_of_speech.split(",")
+            target = False
+            if pos[0] == "形容詞":
+                target = True
+            if pos[1] == "形容動詞語幹":
+                target = True
+            elif pos[0] == "副詞":
+                target = True
+            elif pos[0] == "名詞" and pos[1] == "副詞可能":
+                target = True
+
+            if target:
+                if t.reading in Shorts or sum(w in t.surface for w in ["小", "短"]) > 0:
+                    distances.append(Distance.Short)
+                elif t.reading in Longs or sum(w in t.surface for w in ["大", "長"]) > 0:
+                    distances.append(Distance.Long)
+
+        if len(distances) > 0:
+            counts = Counter(distances)
+            distance = counts.most_common(1)[0][0]
+
+        return distance

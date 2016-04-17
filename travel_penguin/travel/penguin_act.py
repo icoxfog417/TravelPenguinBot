@@ -1,3 +1,4 @@
+import random
 import requests
 from travel_penguin.model.move import Direction, Distance
 from travel_penguin.model.place import Place
@@ -15,7 +16,8 @@ class PenguinAct():
 
         new_ps = self.search(lat, lng)
         if len(new_ps) > 0:
-            return new_ps[0]
+            p = random.choice(new_ps)
+            return p
         else:
             return None
 

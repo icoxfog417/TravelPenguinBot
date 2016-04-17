@@ -18,7 +18,7 @@ class TestPenguinAct(unittest.TestCase):
         places = pa.search(35.712195, 139.775220, "動物園")
         self.assertTrue(len(places) > 0)
 
-    def test_move_penguin(self):
+    def test_move(self):
         pa = self.create_penguin_act()
         place = self.get_test_place()
         moved = pa.move(place, Direction.NorthEast, Distance.Long)
