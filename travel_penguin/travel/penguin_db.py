@@ -35,7 +35,7 @@ class PenguinDb():
         else:
             return None, None
 
-    def history(self, limit=100):
+    def history(self, limit=10):
         collections = self.db[self.PLACES]
         history = collections.find().sort(self.TIMESTAMP_FIELD, 1).limit(limit)
 
