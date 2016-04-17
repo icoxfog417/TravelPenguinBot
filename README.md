@@ -14,11 +14,11 @@ Travel Penguin is LINE bot that travels over the worlds!
 
 ## 2. Direct the travel direction to the Penguin.
 
-examples
+examples (some adjectives ("ちょっと"、"すごく" etc) is allowed)
 
 * 北へ行って
-* 南西へ
-* 北東へ旅して
+* すごく南西へ
+* とりあえず北東へ旅して
 
 Then, Penguin will travel to directed direction.
 
