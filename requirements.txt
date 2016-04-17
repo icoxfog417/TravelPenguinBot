@@ -1,2 +1,4 @@
+Janome==0.2.7
+pymongo==3.2.2
 requests==2.9.1
 tornado==4.3
