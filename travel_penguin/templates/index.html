@@ -1,10 +1,61 @@
 {% extends "base.html" %}
 
 {% block head %}
+<style type="text/css">
+#map {
+    height: 600px;
+    width: 600px;
+}
+</style>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqtwC0qwVZ8WcB9NdXsSpVyQreSIMgMto&callback=initMap">
+</script>
+<!--
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?callback=initMap">
+</script>
+-->
+<script type="text/javascript">
+    var MAP = null;
+    function initMap() {
+        MAP = new google.maps.Map(document.getElementById("map"), {
+            center: {lat: 35.712195, lng: 139.775220},
+            zoom: 9
+        });
+
+        $.post("/", function(data){
+            var path = [];
+            var markers = [];
+            var history = data.history;
+            for(var i = 0; i < history.length; i++){
+                var h = history[i];
+                var location = new google.maps.LatLng(h.lat, h.lng);
+                var marker = new google.maps.Marker({
+                    position: location,
+                    title: h.name
+                });
+                marker.setMap(MAP);
+                path.push(location);
+            }
+
+            //draw line
+            var way = new google.maps.Polyline({
+                path: path,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+            way.setMap(MAP);
+
+        })
+    }
+</script>
 {% end %}
 
 {% block body %}
 <div>
+    <div id="map"></div>
 </div>
 {% module xsrf_form_html() %}
 {% end %}
