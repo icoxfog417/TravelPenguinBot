@@ -37,7 +37,7 @@ class PenguinDb():
 
     def history(self, limit=100):
         collections = self.db[self.PLACES]
-        history = collections.find().sort(self.TIMESTAMP_FIELD, -1).limit(limit)
+        history = collections.find().sort(self.TIMESTAMP_FIELD, 1).limit(limit)
 
         result = []
         for h in history:

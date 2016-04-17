@@ -7,14 +7,14 @@
     width: 600px;
 }
 </style>
-<!--
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqtwC0qwVZ8WcB9NdXsSpVyQreSIMgMto&callback=initMap">
 </script>
--->
+<!--
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?callback=initMap">
 </script>
+-->
 <script type="text/javascript">
     var MAP = null;
     function createInfoWindow(marker){
@@ -52,10 +52,12 @@
             //draw line
             var way = new google.maps.Polyline({
                 path: path,
-                geodesic: true,
-                strokeColor: '#FF0000',
-                strokeOpacity: 1.0,
-                strokeWeight: 2
+                icons: [{
+                    icon: {
+                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+                    },
+                    offset: '100%'
+                }]
             });
             way.setMap(MAP);
 
